@@ -1,31 +1,39 @@
 const canvas = document.getElementById("heart");
 const ctx = canvas.getContext("2d");
 
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
-
-ctx.fillStyle = "#ff4da6";
-ctx.font = "12px Arial";
+function resize() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+}
+resize();
+window.addEventListener("resize", resize);
 
 let t = 0;
 
 function draw() {
-    if (t > Math.PI * 2) return;
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-    let x = 16 * Math.pow(Math.sin(t), 3);
-    let y = 13 * Math.cos(t)
-          - 5 * Math.cos(2 * t)
-          - 2 * Math.cos(3 * t)
-          - Math.cos(4 * t);
+    ctx.fillStyle = "#ff4d9d";
+    ctx.font = `${Math.max(8, canvas.width / 45)}px Arial`;
 
-    x = canvas.width / 2 + x * 18;
-    y = canvas.height / 2 - y * 18;
+    for (let a = 0; a < t; a += 0.05) {
+        const x = 16 * Math.pow(Math.sin(a), 3);
+        const y = 13 * Math.cos(a)
+                - 5 * Math.cos(2 * a)
+                - 2 * Math.cos(3 * a)
+                - Math.cos(4 * a);
 
-    ctx.fillText("I Love You", x, y);
+        ctx.fillText(
+            "I Love You",
+            canvas.width / 2 + x * (canvas.width / 40),
+            canvas.height / 2 - y * (canvas.width / 40)
+        );
+    }
 
-    t += 0.03;
-
-    requestAnimationFrame(draw);
+    if (t < Math.PI * 2) {
+        t += 0.05;
+        requestAnimationFrame(draw);
+    }
 }
 
 draw();
