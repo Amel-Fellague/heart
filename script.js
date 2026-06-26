@@ -16,7 +16,7 @@ function draw() {
     ctx.fillStyle = "#ff4d9d";
     ctx.font = `${Math.max(8, canvas.width / 45)}px Arial`;
 
-    for (let a = 0; a < t; a += 0.03) {
+    for (let a = 0; a < t; a += 0.07) {
         const x = 16 * Math.pow(Math.sin(a), 3);
         const y = 13 * Math.cos(a)
                 - 5 * Math.cos(2 * a)
@@ -31,7 +31,7 @@ function draw() {
     }
 
     if (t < Math.PI * 2) {
-        t += 0.03;
+        t += 0.015;
         requestAnimationFrame(draw);
     }
 }
